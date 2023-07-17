@@ -1,10 +1,11 @@
 import classNames from "classnames";
 import React from "react";
+import { Container } from "./components/Container";
 
 export const App: React.FC = () => {
   return (
-    <>
-      <div className={classNames("text-4xl")}>hello</div>
-    </>
+    <main className={classNames("")}>
+      <Container />
+    </main>
   );
 };
