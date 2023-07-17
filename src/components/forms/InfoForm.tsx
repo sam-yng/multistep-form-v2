@@ -3,9 +3,10 @@ import { useFormik } from "formik";
 import { FormHeader } from "../FormHeader";
 import classNames from "classnames";
 import { useForm } from "../../utils/FormContext";
+import { Input } from "../Input";
 
 export const InfoForm: React.FC = () => {
-  const { formStep, setFormStep } = useForm();
+  const { formStep, setFormStep, setInfo } = useForm();
 
   const formik = useFormik({
     initialValues: {
@@ -16,12 +17,18 @@ export const InfoForm: React.FC = () => {
     validate() {
       const errors = {};
       if (!formik.values.name) errors.name = "This field is required";
-      if (!formik.values.email) errors.email = "This field is required";
+      if (!formik.values.email) {
+        errors.email = "This field is required";
+      } else if (
+        !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(formik.values.email)
+      ) {
+        errors.email = "Invalid email address";
+      }
       if (!formik.values.phone) errors.phone = "This field is required";
       return errors;
     },
     onSubmit: (values) => {
-      console.log(values);
+      setInfo(values);
       setFormStep(formStep + 1);
     },
   });
@@ -35,51 +42,33 @@ export const InfoForm: React.FC = () => {
         onSubmit={formik.handleSubmit}
         className={classNames("mt-4", "space-y-4")}
       >
-        <div className={classNames("flex", "flex-col")}>
-          <div className={classNames("flex", "flex-row")}>
-            <label htmlFor="name">Name</label>
-            {formik.errors.name && formik.touched.name ? (
-              <h1 className="ml-auto">{formik.errors.name}</h1>
-            ) : null}
-          </div>
-          <input
-            onChange={formik.handleChange}
-            value={formik.values.name}
-            id="name"
-            name="name"
-            placeholder="e.g. Stephen King"
-          />
-        </div>
-        <div className={classNames("flex", "flex-col")}>
-          <div className={classNames("flex", "flex-row")}>
-            <label htmlFor="email">Email Address</label>
-            {formik.errors.email && formik.touched.email ? (
-              <h1 className="ml-auto">{formik.errors.email}</h1>
-            ) : null}
-          </div>
-          <input
-            onChange={formik.handleChange}
-            value={formik.values.email}
-            id="email"
-            name="email"
-            placeholder="e.g. stephenking@lorem.com"
-          />
-        </div>
-        <div className={classNames("flex", "flex-col")}>
-          <div className={classNames("flex", "flex-row")}>
-            <label htmlFor="email">Phone Number</label>
-            {formik.errors.phone && formik.touched.phone ? (
-              <h1 className="ml-auto">{formik.errors.phone}</h1>
-            ) : null}
-          </div>
-          <input
-            onChange={formik.handleChange}
-            value={formik.values.phone}
-            id="phone"
-            name="phone"
-            placeholder="e.g. +1 234 567 890"
-          />
-        </div>
+        <Input
+          label="Name"
+          placeholder="e.g. Stephen King"
+          onChange={formik.handleChange}
+          error={formik.errors.name}
+          touched={formik.touched.name}
+          value={formik.values.name}
+          name="name"
+        />
+        <Input
+          label="Email Address"
+          placeholder="e.g. stephenking@lorem.com"
+          onChange={formik.handleChange}
+          error={formik.errors.email}
+          touched={formik.touched.email}
+          value={formik.values.email}
+          name="email"
+        />
+        <Input
+          label="Phone Number"
+          placeholder="e.g. +1 234 567 890"
+          onChange={formik.handleChange}
+          error={formik.errors.phone}
+          touched={formik.touched.phone}
+          value={formik.values.phone}
+          name="phone"
+        />
         <button type="submit" className={classNames("border", "border-black")}>
           Next Step
         </button>
