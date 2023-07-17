@@ -8,15 +8,15 @@ import { useFormik } from "formik";
 import { FormHeader } from "../FormHeader";
 
 export const PlanForm: React.FC = () => {
-  const { setFormStep, formStep, billing, setBilling, plan } = useForm();
+  const { setFormStep, formStep } = useForm();
 
   const formik = useFormik({
     initialValues: {
-      plan: plan,
-      billing: billing,
+      plan: 1,
+      billing: "monthly",
     },
-    onSubmit: () => {
-      console.log(plan, billing);
+    onSubmit: (values) => {
+      console.log(values);
       setFormStep(formStep + 1);
     },
   });
@@ -32,16 +32,12 @@ export const PlanForm: React.FC = () => {
           <Plan name="Advanced" price="12" number={2} />
           <Plan name="Pro" price="15" number={3} />
         </div>
-        <div
-          onClick={() =>
-            setBilling(billing === "monthly" ? "yearly" : "monthly")
-          }
-        >
+        <input value={formik.values.billing} onChange={formik.handleChange}>
           <img
             className={classNames("w-12")}
-            src={billing === "monthly" ? monthly : yearly}
+            src={formik.values.billing === "monthly" ? monthly : yearly}
           />
-        </div>
+        </input>
         <div>
           <button
             className={classNames("border", "border-black")}

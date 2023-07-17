@@ -4,17 +4,20 @@ import { AddOn } from "../AddOn";
 import classNames from "classnames";
 import { useForm } from "../../utils/FormContext";
 import { useFormik } from "formik";
-import { AddOns } from "../../utils/FormContext";
 
 export const AddOnForm: React.FC = () => {
-  const { formStep, setFormStep, addOns } = useForm();
+  const { formStep, setFormStep } = useForm();
 
   const formik = useFormik({
     initialValues: {
-      addOns: addOns,
+      addOns: {
+        1: false,
+        2: false,
+        3: false,
+      },
     },
-    onSubmit: () => {
-      console.log(addOns);
+    onSubmit: (values) => {
+      console.log(values);
     },
   });
 

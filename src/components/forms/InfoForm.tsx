@@ -6,7 +6,7 @@ import { useForm } from "../../utils/FormContext";
 import { Input } from "../Input";
 
 export const InfoForm: React.FC = () => {
-  const { formStep, setFormStep, setInfo } = useForm();
+  const { formStep, setFormStep } = useForm();
 
   const formik = useFormik({
     initialValues: {
@@ -28,7 +28,7 @@ export const InfoForm: React.FC = () => {
       return errors;
     },
     onSubmit: (values) => {
-      setInfo(values);
+      console.log(values);
       setFormStep(formStep + 1);
     },
   });

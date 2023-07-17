@@ -13,18 +13,9 @@ export const AddOn: React.FC<AddOnProps> = ({
   description,
   number,
 }: AddOnProps) => {
-  const { addOns, setAddOns } = useForm();
-
-  const handleChange = (e) => {
-    setAddOns({
-      ...addOns,
-      [e.target.value]: true,
-    });
-  };
-
   return (
     <div className={classNames("flex", "flex-row", "border", "border-black")}>
-      <input onClick={handleChange} type="checkbox" value={number} />
+      <input type="checkbox" value={number} />
       <div className={classNames("flex", "flex-col")}>
         <h1>{name}</h1>
         <p>{description}</p>
