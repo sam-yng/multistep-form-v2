@@ -1,13 +1,9 @@
 import React from "react";
 import classNames from "classnames";
 import { ProgressBar } from "./ProgressBar";
-import { InfoForm } from "./forms/InfoForm";
-import { useForm } from "../utils/FormContext";
-import { PlanForm } from "./forms/PlanForm";
-import { AddOnForm } from "./forms/AddOnForm";
+import { Form } from "./Form";
 
 export const Container: React.FC = () => {
-  const { formStep } = useForm();
   return (
     <main
       className={classNames(
@@ -23,7 +19,7 @@ export const Container: React.FC = () => {
     >
       <ProgressBar />
       <article className={classNames("flex", "flex-col")}>
-        <AddOnForm />
+        <Form />
       </article>
     </main>
   );

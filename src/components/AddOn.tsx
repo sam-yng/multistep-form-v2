@@ -1,21 +1,20 @@
-import React from "react";
+import React, { ChangeEventHandler } from "react";
 import classNames from "classnames";
-import { useForm } from "../utils/FormContext";
 
 type AddOnProps = {
   name: string;
   description: string;
-  number: number;
+  onChange: ChangeEventHandler<HTMLInputElement>;
 };
 
 export const AddOn: React.FC<AddOnProps> = ({
   name,
   description,
-  number,
+  onChange,
 }: AddOnProps) => {
   return (
     <div className={classNames("flex", "flex-row", "border", "border-black")}>
-      <input type="checkbox" value={number} />
+      <input type="checkbox" onChange={onChange} value={name} name={name} />
       <div className={classNames("flex", "flex-col")}>
         <h1>{name}</h1>
         <p>{description}</p>

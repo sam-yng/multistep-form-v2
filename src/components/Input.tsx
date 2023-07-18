@@ -9,6 +9,7 @@ type InputProps = {
   touched: boolean | undefined;
   value: string;
   name: string;
+  type?: string;
 };
 
 export const Input: React.FC<InputProps> = ({
@@ -19,6 +20,7 @@ export const Input: React.FC<InputProps> = ({
   touched,
   value,
   name,
+  type,
 }: InputProps) => {
   return (
     <div className={classNames("flex", "flex-col")}>
@@ -33,6 +35,7 @@ export const Input: React.FC<InputProps> = ({
           id={name}
           name={name}
           placeholder={placeholder}
+          type={type}
         />
       }
     </div>

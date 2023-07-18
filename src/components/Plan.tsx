@@ -1,37 +1,30 @@
-import React from "react";
+import React, { ChangeEventHandler } from "react";
 import classNames from "classnames";
-import { useForm } from "../utils/FormContext";
 
 type PlanProps = {
   name: string;
   price: string;
   icon?: string;
-  number: number;
+  onChange: ChangeEventHandler<HTMLInputElement>;
+  monthly: boolean;
 };
 
 export const Plan: React.FC<PlanProps> = ({
   name,
   price,
   icon,
-  number,
+  onChange,
+  monthly,
 }: PlanProps) => {
-  const { setPlan, plan } = useForm();
-
   return (
-    <div
-      onClick={() => setPlan(number)}
-      className={classNames(
-        "border",
-        "border-black",
-        "py-8",
-        "px-4",
-        "cursor-pointer",
-        `${number === plan ? "bg-red-100" : ""}`,
-      )}
-    >
+    <div className={classNames("border", "border-black", "py-8", "px-4")}>
+      <input type="radio" name="plan" value={name} onChange={onChange} />
       <img src={icon} />
       <h1>{name}</h1>
-      <p>${price}/mo</p>
+      <p>
+        ${price}/{monthly ? "mo" : "yr"}
+      </p>
+      {monthly ? <p>2 months free</p> : null}
     </div>
   );
 };
