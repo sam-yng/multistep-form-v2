@@ -25,11 +25,23 @@ export const Input: React.FC<InputProps> = ({
   return (
     <div className={classNames("flex", "flex-col")}>
       <div className={classNames("flex", "flex-row")}>
-        <label htmlFor="name">{label}</label>
+        <label
+          className={classNames("text-denim", "mb-2", "font-regular")}
+          htmlFor="name"
+        >
+          {label}
+        </label>
         {error && touched ? <h1 className="ml-auto">{error}</h1> : null}
       </div>
       {
         <input
+          className={classNames(
+            "rounded-md",
+            "border",
+            "border-lightgray",
+            "p-3",
+            "font-medium",
+          )}
           onChange={onChange}
           value={value}
           id={name}

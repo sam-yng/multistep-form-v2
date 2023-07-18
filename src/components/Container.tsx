@@ -9,16 +9,17 @@ export const Container: React.FC = () => {
       className={classNames(
         "flex",
         "flex-row",
-        "border",
-        "border-black",
-        "w-1/2",
         "mx-auto",
-        "px-6",
-        "py-4",
+        "bg-white",
+        "rounded-xl",
+        "h-[60vh]",
+        "w-[60vw]",
       )}
     >
       <ProgressBar />
-      <article className={classNames("flex", "flex-col")}>
+      <article
+        className={classNames("flex", "flex-col", "py-6", "px-12", "bg-white")}
+      >
         <Form />
       </article>
     </main>

@@ -9,6 +9,7 @@ import { Plan } from "./Plan";
 import Switch from "@mui/material/Switch";
 import { AddOn } from "./AddOn";
 import heart from "../assets/images/icon-thank-you.svg";
+import { NextButton } from "./NextButton";
 
 type FormikErrors = {
   name?: string;
@@ -149,12 +150,9 @@ export const Form: React.FC = () => {
               name="phone"
               type="number"
             />
-            <button
-              onClick={() => setFormStep(formStep + 1)}
-              className={classNames("border", "border-black")}
-            >
-              Next Step
-            </button>
+            <div className="flex justify-end">
+              <NextButton />
+            </div>
           </div>
         </div>
       ) : formStep === 2 ? (

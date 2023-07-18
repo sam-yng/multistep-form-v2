@@ -16,3 +16,11 @@
 	font-family: "regular";
 	src: url("./assets/fonts/Ubuntu-Regular.ttf");
 }
+
+.nav {
+	background-image: url(../src/assets/images/bg-sidebar-desktop.svg);
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
