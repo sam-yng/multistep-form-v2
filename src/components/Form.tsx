@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import React from "react";
 import { useForm } from "../utils/FormContext";
 import { useFormik } from "formik";
@@ -7,15 +8,20 @@ import { Input } from "./Input";
 import { Plan } from "./Plan";
 import Switch from "@mui/material/Switch";
 import { AddOn } from "./AddOn";
+import heart from "../assets/images/icon-thank-you.svg";
 
 type FormikErrors = {
   name?: string;
   email?: string;
   phone?: string;
+  plan?: string;
 };
 
 export const Form: React.FC = () => {
   const { formStep, setFormStep } = useForm();
+
+  const costs: number[] = [];
+  let total: number = 0;
 
   const formik = useFormik({
     initialValues: {
@@ -42,22 +48,79 @@ export const Form: React.FC = () => {
       return errors;
     },
     onSubmit: (values) => {
+      console.log(formStep);
       console.log(values);
+      console.log(costs);
       setFormStep(formStep + 1);
     },
   });
+
+  const handleGoBack = () => {
+    if (formStep === 3) {
+      formik.values.plan === "Arcade";
+      formik.values.yearlyBilling === false;
+    }
+    if (formStep === 4) {
+      formik.values["Online service"] = false;
+      formik.values["Larger storage"] = false;
+      formik.values["Customizable profile"] = false;
+    }
+    setFormStep(formStep - 1);
+  };
+
+  if (formik.values.plan === "Arcade") {
+    if (formik.values.yearlyBilling) {
+      costs.push(90);
+    } else if (!formik.values.yearlyBilling) {
+      costs.push(9);
+    }
+  } else if (formik.values.plan === "Advanced") {
+    if (formik.values.yearlyBilling) {
+      costs.push(120);
+    } else if (!formik.values.yearlyBilling) {
+      costs.push(12);
+    }
+  } else if (formik.values.plan === "Pro") {
+    if (formik.values.yearlyBilling) {
+      costs.push(150);
+    } else if (!formik.values.yearlyBilling) {
+      costs.push(15);
+    }
+  }
+
+  if (formik.values["Online service"]) {
+    if (formik.values.yearlyBilling) {
+      costs.push(10);
+    } else if (!formik.values.yearlyBilling) {
+      costs.push(1);
+    }
+  }
+  if (formik.values["Larger storage"]) {
+    if (formik.values.yearlyBilling) {
+      costs.push(20);
+    } else if (!formik.values.yearlyBilling) {
+      costs.push(2);
+    }
+  }
+  if (formik.values["Customizable profile"]) {
+    if (formik.values.yearlyBilling) {
+      costs.push(20);
+    } else if (!formik.values.yearlyBilling) {
+      costs.push(2);
+    }
+  }
+
+  formStep === 4 ? (total = costs.reduce((a, b) => a + b, 0)) : null;
+
   return (
-    <main>
+    <form onSubmit={formik.handleSubmit}>
       {formStep === 1 ? (
         <div className={classNames("flex", "flex-col", "ml-4")}>
           <FormHeader
             title="Personal info"
             instructions="Please provide your name, email address, and phone number."
           />
-          <form
-            onSubmit={formik.handleSubmit}
-            className={classNames("mt-4", "space-y-4")}
-          >
+          <div className={classNames("mt-4", "space-y-4")}>
             <Input
               label="Name"
               placeholder="e.g. Stephen King"
@@ -87,12 +150,12 @@ export const Form: React.FC = () => {
               type="number"
             />
             <button
-              type="submit"
+              onClick={() => setFormStep(formStep + 1)}
               className={classNames("border", "border-black")}
             >
               Next Step
             </button>
-          </form>
+          </div>
         </div>
       ) : formStep === 2 ? (
         <div>
@@ -100,7 +163,7 @@ export const Form: React.FC = () => {
             title="Select your plan"
             instructions="You have the option of monthly or yearly billing"
           />
-          <form onSubmit={formik.handleSubmit}>
+          <div>
             <div className={classNames("flex", "flex-row", "space-x-12")}>
               <Plan
                 monthly={formik.values.yearlyBilling ? true : false}
@@ -134,18 +197,18 @@ export const Form: React.FC = () => {
             <div>
               <button
                 className={classNames("border", "border-black")}
-                onClick={() => setFormStep(formStep - 1)}
+                onClick={handleGoBack}
               >
                 Go Back
               </button>
               <button
                 className={classNames("border", "border-black", "ml-10")}
-                type="submit"
+                onClick={() => setFormStep(formStep + 1)}
               >
                 Next Step
               </button>
             </div>
-          </form>
+          </div>
         </div>
       ) : formStep === 3 ? (
         <div>
@@ -153,40 +216,40 @@ export const Form: React.FC = () => {
             title="Pick add-ons"
             instructions="Add-ons help enhance your gaming experience."
           />
-          <form
-            onSubmit={formik.handleSubmit}
-            className={classNames("space-y-4")}
-          >
+          <div className={classNames("space-y-4")}>
             <AddOn
               onChange={formik.handleChange}
               name="Online service"
               description="Access to multiplayer games"
+              price={formik.values.yearlyBilling ? "+$10/yr" : "+$1/mo"}
             />
             <AddOn
               onChange={formik.handleChange}
               name="Larger storage"
               description="Extra 1TB of cloud save"
+              price={formik.values.yearlyBilling ? "+$20/yr" : "+$2/mo"}
             />
             <AddOn
               onChange={formik.handleChange}
               name="Customizable profile"
               description="Custom theme on your profile"
+              price={formik.values.yearlyBilling ? "+$20/yr" : "+$2/mo"}
             />
             <div>
               <button
                 className={classNames("border", "border-black")}
-                onClick={() => setFormStep(formStep - 1)}
+                onClick={handleGoBack}
               >
                 Go Back
               </button>
               <button
                 className={classNames("border", "border-black", "ml-10")}
-                type="submit"
+                onClick={() => setFormStep(formStep + 1)}
               >
                 Next Step
               </button>
             </div>
-          </form>
+          </div>
         </div>
       ) : formStep === 4 ? (
         <div>
@@ -201,23 +264,56 @@ export const Form: React.FC = () => {
             ) : (
               <h1>(Monthly)</h1>
             )}
+            <p>
+              {formik.values.plan === "Arcade" && formik.values.yearlyBilling
+                ? "$90/yr"
+                : formik.values.plan === "Arcade" &&
+                  !formik.values.yearlyBilling
+                ? "$9/mo"
+                : null}
+              {formik.values.plan === "Advanced" && formik.values.yearlyBilling
+                ? "$120/yr"
+                : formik.values.plan === "Advanced" &&
+                  !formik.values.yearlyBilling
+                ? "$12/mo"
+                : null}
+              {formik.values.plan === "Pro" && formik.values.yearlyBilling
+                ? "$150/yr"
+                : formik.values.plan === "Pro" && !formik.values.yearlyBilling
+                ? "$15/mo"
+                : null}
+            </p>
             <button onClick={() => setFormStep(2)}>Change</button>
             <ul>
               {formik.values["Online service"] ? (
-                <li>Online service +$1/mo</li>
+                <li>
+                  Online service{" "}
+                  {formik.values.yearlyBilling ? "+$10/yr" : "+$1/mo"}
+                </li>
               ) : null}
               {formik.values["Larger storage"] ? (
-                <li>Larger storage +$2/mo</li>
+                <li>
+                  Larger storage{" "}
+                  {formik.values.yearlyBilling ? "+$20/yr" : "+$2/mo"}
+                </li>
               ) : null}
               {formik.values["Customizable profile"] ? (
-                <li>Customizable profile +$2/mo</li>
+                <li>
+                  Customizable profile{" "}
+                  {formik.values.yearlyBilling ? "+$20/yr" : "+$2/mo"}
+                </li>
               ) : null}
             </ul>
           </div>
+          <p>Total (per {formik.values.yearlyBilling ? "year" : "month"})</p>
+          <p>
+            ${total}
+            {formik.values.yearlyBilling ? "/yr" : "/mo"}
+          </p>
           <div>
             <button
               className={classNames("border", "border-black")}
-              onClick={() => setFormStep(formStep - 1)}
+              onClick={handleGoBack}
             >
               Go Back
             </button>
@@ -230,8 +326,16 @@ export const Form: React.FC = () => {
           </div>
         </div>
       ) : formStep === 5 ? (
-        <h1>hello</h1>
+        <div className={classNames("flex", "flex-col")}>
+          <img className={classNames("h-12")} src={heart} />
+          <h1>Thank yoy!</h1>
+          <p>
+            Thanks for confirming your subscription! We hope you have fun using
+            our platform. If you ever need support, please feel free to email us
+            at support@loremgaming.com.
+          </p>
+        </div>
       ) : null}
-    </main>
+    </form>
   );
 };

@@ -5,12 +5,14 @@ type AddOnProps = {
   name: string;
   description: string;
   onChange: ChangeEventHandler<HTMLInputElement>;
+  price: string;
 };
 
 export const AddOn: React.FC<AddOnProps> = ({
   name,
   description,
   onChange,
+  price,
 }: AddOnProps) => {
   return (
     <div className={classNames("flex", "flex-row", "border", "border-black")}>
@@ -19,6 +21,7 @@ export const AddOn: React.FC<AddOnProps> = ({
         <h1>{name}</h1>
         <p>{description}</p>
       </div>
+      <p>{price}</p>
     </div>
   );
 };
