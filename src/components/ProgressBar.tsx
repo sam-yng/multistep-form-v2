@@ -10,7 +10,15 @@ type ProgressPointProps = {
 const ProgressPoint = ({ number, name }: ProgressPointProps) => {
   const { formStep } = useForm();
   return (
-    <li className={classNames("flex", "flex-row", "items-center", "pt-2")}>
+    <li
+      className={classNames(
+        "flex",
+        "flex-row",
+        "items-center",
+        "pt-2",
+        "min-w-[30vw]",
+      )}
+    >
       <span
         className={classNames(
           "rounded-full",
@@ -18,9 +26,10 @@ const ProgressPoint = ({ number, name }: ProgressPointProps) => {
           "border-white",
           "px-3",
           "mr-4",
-          "text-white",
           "py-1",
-          `${formStep.toString() === number ? "bg-alb text-navy" : ""}`,
+          `${
+            formStep.toString() === number ? "bg-alb text-navy" : "text-white"
+          }`,
         )}
       >
         {number}

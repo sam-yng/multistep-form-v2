@@ -31,7 +31,9 @@ export const Input: React.FC<InputProps> = ({
         >
           {label}
         </label>
-        {error && touched ? <h1 className="ml-auto">{error}</h1> : null}
+        {error && touched ? (
+          <h1 className={classNames("ml-auto", "text-red")}>{error}</h1>
+        ) : null}
       </div>
       {
         <input

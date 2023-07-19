@@ -15,13 +15,25 @@ export const AddOn: React.FC<AddOnProps> = ({
   price,
 }: AddOnProps) => {
   return (
-    <div className={classNames("flex", "flex-row", "border", "border-black")}>
+    <div
+      className={classNames(
+        "flex",
+        "flex-row",
+        "border",
+        "border-lightgray",
+        "rounded-lg",
+        "items-center",
+        "py-3",
+        "px-5",
+        "mt-4",
+      )}
+    >
       <input type="checkbox" onChange={onChange} value={name} name={name} />
-      <div className={classNames("flex", "flex-col")}>
-        <h1>{name}</h1>
-        <p>{description}</p>
+      <div className={classNames("flex", "flex-col", "ml-4")}>
+        <h1 className="font-medium">{name}</h1>
+        <p className="text-coolgray">{description}</p>
       </div>
-      <p>{price}</p>
+      <p className="ml-auto">{price}</p>
     </div>
   );
 };

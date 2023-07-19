@@ -18,7 +18,14 @@ export const Container: React.FC = () => {
     >
       <ProgressBar />
       <article
-        className={classNames("flex", "flex-col", "py-6", "px-12", "bg-white")}
+        className={classNames(
+          "flex",
+          "flex-col",
+          "py-6",
+          "px-12",
+          "bg-white",
+          "w-full",
+        )}
       >
         <Form />
       </article>

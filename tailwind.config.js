@@ -11,7 +11,9 @@ export default {
       "alb": "#dbe1ff",
       "denim": "#022959",
       "white": "#ffff",
-      "navy": "#02295a"
+      "navy": "#02295a",
+      "red": "#FF0000",
+      "purple": "#483EFF"
     },
     extend: {
       fontFamily: {
