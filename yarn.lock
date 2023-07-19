@@ -2962,6 +2962,7 @@ eslint-plugin-react@latest:
     prettier: 3.0.0
     react: ^18.2.0
     react-dom: ^18.2.0
+    react-hook-form: ^7.45.2
     tailwindcss: ^3.3.3
     typescript: ^5.0.2
     vite: ^4.4.0
@@ -3437,6 +3438,15 @@ eslint-plugin-react@latest:
   version: 2.0.4
   resolution: "react-fast-compare@npm:2.0.4"
   checksum: 06046595f90a4e3e3a56f40a8078c00aa71bdb064ddb98343f577f546aa22e888831fd45f009c93b34707cc842b4c637737e956fd13d6f80607ee92fb9cf9a1c
+  languageName: node
+  linkType: hard
+
+"react-hook-form@npm:^7.45.2":
+  version: 7.45.2
+  resolution: "react-hook-form@npm:7.45.2"
+  peerDependencies:
+    react: ^16.8.0 || ^17 || ^18
+  checksum: 023ca091f2bb1f3117d8a694871874c4a344f02c795c6a08b8f78b09b78444451375fbe921d7db4ba7cd78909b1fa5e92d19efd2bfedc43124fdc44540ac036c
   languageName: node
   linkType: hard
 

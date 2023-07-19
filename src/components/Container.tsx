@@ -1,22 +1,31 @@
 import React from "react";
 import classNames from "classnames";
 import { ProgressBar } from "./ProgressBar";
-import { InfoForm } from "./forms/InfoForm";
 
 export const Container: React.FC = () => {
   return (
-    <main className={classNames("flex", "flex-row")}>
+    <main
+      className={classNames(
+        "flex",
+        "flex-row",
+        "mx-auto",
+        "bg-white",
+        "rounded-xl",
+        "h-[60vh]",
+        "w-[60vw]",
+      )}
+    >
       <ProgressBar />
-      <article className={classNames("flex", "flex-col")}>
-        {/* {FormStep === 1
-					? ""
-					: FormStep === 2
-					? ""
-					: FormStep === 3
-					? ""
-					: ""} */}
-        <InfoForm />
-      </article>
+      <article
+        className={classNames(
+          "flex",
+          "flex-col",
+          "py-6",
+          "px-12",
+          "bg-white",
+          "w-full",
+        )}
+      ></article>
     </main>
   );
 };
