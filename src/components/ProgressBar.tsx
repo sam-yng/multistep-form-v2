@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import React from "react";
-import { useForm } from "../utils/FormContext";
+import { useFormContext } from "../utils/FormContext";
 
 type ProgressPointProps = {
   number: string;
@@ -11,7 +11,7 @@ export const ProgressPoint: React.FC<ProgressPointProps> = ({
   number,
   name,
 }: ProgressPointProps) => {
-  const { formStep } = useForm();
+  const { formStep } = useFormContext();
   return (
     <li
       className={classNames(

@@ -23,7 +23,7 @@ export const FormProvider: React.FC<{ children: React.ReactNode }> = ({
   return <FormContext.Provider value={value}>{children}</FormContext.Provider>;
 };
 
-export const useForm = (): FormContextType => {
+export const useFormContext = (): FormContextType => {
   const value = useContext(FormContext);
   if (!value) {
     throw new Error("useForm can only be called from within a FormProvider");

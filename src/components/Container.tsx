@@ -1,6 +1,7 @@
 import React from "react";
 import classNames from "classnames";
 import { ProgressBar } from "./ProgressBar";
+import { Form } from "./Form";
 
 export const Container: React.FC = () => {
   return (
@@ -25,7 +26,9 @@ export const Container: React.FC = () => {
           "bg-white",
           "w-full",
         )}
-      ></article>
+      >
+        <Form />
+      </article>
     </main>
   );
 };
